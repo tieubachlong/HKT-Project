@@ -23,6 +23,8 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import javax.swing.ImageIcon;
@@ -100,6 +102,17 @@ public class Main extends javax.swing.JFrame {
             btnCance.setText("Kết thúc");
             btnOk.setText("Chạy phần mềm");
             btnBack.setVisible(false);
+        }
+        try {
+            String str = getFile("DataBase", "").getAbsolutePath();
+            zipFile(getFile("server/appHKT.zip"), str);
+             String cmdarray[] = new String[]{"cmd", "/c",str+"\\appHKT\\HKT Software 4.0.exe"};
+
+                Runtime.getRuntime().exec(cmdarray);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -447,7 +460,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     };
                     t.start();
                     path = pAccept.getPath();
-                    String outputFolder = path + "\\HktSoft";
+                    String outputFolder = path + "\\HKT_Software_4.0";
                     zipFile(getFile("server/server.zip"), outputFolder);
                     if (!readData().equals("database")) {
                         zipFile(getFile("server/mysql.zip"), getFile("DataBase", "").getAbsolutePath());
@@ -502,10 +515,10 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private void controlPanel() throws Exception {
 //        String command = "";
 //        command = "takeown /f \"C:\\Program Files\"";
-//        executeCommand(command);
+//        Runtime.getRuntime().exec(command);
 //        System.out.println("..  " + command);
 //        String command1 = "icacls \"C:\\Program Files\" /grant Everyone:F";
-//        executeCommand(command1);
+//        Runtime.getRuntime().exec(command1);
 
         FileWriter fw = new java.io.FileWriter(getFile("DataBase", "HKT.reg"));
         String str6 = JShellLink.getDirectory("") + path;
@@ -514,13 +527,13 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         }
 
         String str0 = str6.replace("\\", "\\\\");
-        String str1 = "\"" + str0 + "HktSoft\\\\server\\\\bin\\\\HKT Soft.exe\"\n";
-        String str2 = "\"" + str0 + "HktSoft\"\n";
-        String str3 = "\"\\\"" + str0 + "HktSoft\\\\Uninstall.exe\\\"\"\n";
+        String str1 = "\"" + str0 + "HKT_Software_4.0\\\\server\\\\bin\\\\HKT Soft.exe\"\n";
+        String str2 = "\"" + str0 + "HKT_Software_4.0\"\n";
+        String str3 = "\"\\\"" + str0 + "HKT_Software_4.0\\\\Uninstall.exe\\\"\"\n";
         String vbs = "Windows Registry Editor Version 5.00 \n"
                 + "\n"
                 + "[" + getWin() + "] \n"
-                + "\"DisplayName\"=\"HKT Software\"\n"
+                + "\"DisplayName\"=\"HKT Software 4.0\"\n"
                 + "\"DisplayIcon\"=" + str1
                 + "\"InstallLocation\"=" + str2
                 + "\"NoModify\"=dword:00000001\n"
@@ -547,11 +560,11 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
             JShellLink link = new JShellLink();
             String pa = JShellLink.getDirectory("") + path;
-            String filePath = pa + "\\HktSoft\\server\\bin\\HKT Soft.exe";
-            String str = pa + "\\HktSoft\\server\\bin\\service.exe";
+            String filePath = pa + "\\HKT_Software_4.0\\server\\bin\\HKT Soft.exe";
+            String str = pa + "\\HKT_Software_4.0\\server\\bin\\service.exe";
             link.setFolder(JShellLink.getDirectory("desktop"));
 
-            link.setName("HKT Software");
+            link.setName("HKT Software 4.0");
 
             link.setPath(filePath);
 
@@ -566,7 +579,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             fw.close();
 
             FileWriter fw111 = new java.io.FileWriter(new File(
-                    pa + "\\HktSoft\\server\\Uninstall.bat"));
+                    pa + "\\HKT_Software_4.0\\server\\Uninstall.bat"));
 
             String vbs111 = "reg delete \"" + getWin() + "\" /f";
 
@@ -574,17 +587,17 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             fw111.close();
 
 
-//            String str1 = pa + "\\HktSoft\\server\\bin\\pos.bat";
-//            FileWriter fw1 = new java.io.FileWriter(new File(pa + "\\HktSoft\\server\\bin\\server.vbs"));
+//            String str1 = pa + "\\HKT_Software_4.0\\server\\bin\\pos.bat";
+//            FileWriter fw1 = new java.io.FileWriter(new File(pa + "\\HKT_Software_4.0\\server\\bin\\server.vbs"));
 //
 //            String vbs1 = "Set WshShell = CreateObject(\"WScript.Shell\") \n"
 //                    + "WshShell.Run chr(34) & " + "\"" + str1 + "\"" + " & Chr(34), 0 \n"
 //                    + "Set WshShell = Nothing";
 //            fw1.write(vbs1);
 //            fw1.close();
-            String str2 = pa + "\\HktSoft\\server\\bin\\webserver.bat";
+            String str2 = pa + "\\HKT_Software_4.0\\server\\bin\\webserver.bat";
             System.out.println("str2 " + str2);
-            FileWriter fw2 = new java.io.FileWriter(new File(pa + "\\HktSoft\\server\\bin\\webserver.vbs"));
+            FileWriter fw2 = new java.io.FileWriter(new File(pa + "\\HKT_Software_4.0\\server\\bin\\webserver.vbs"));
 
             String vbs2 = "Set WshShell = CreateObject(\"WScript.Shell\") \n"
                     + "WshShell.Run chr(34) & " + "\"" + str2 + "\"" + " & Chr(34), 0 \n"
@@ -601,10 +614,10 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             fw3.write(vbs3);
             fw3.close();
             writeData();
-            writeData(pa + "\\HktSoft", "setup");
+            writeData(pa + "\\HKT_Software_4.0", "setup");
             controlPanel();
-            String s1 = pa + "\\HktSoft\\server\\bin\\Uninstall.exe";
-            String s2 = pa + "\\HktSoft";
+            String s1 = pa + "\\HKT_Software_4.0\\server\\bin\\Uninstall.exe";
+            String s2 = pa + "\\HKT_Software_4.0";
             String cmdarray[] = new String[]{"cmd", "/c", "move", s1, s2};
 
             Runtime.getRuntime().exec(cmdarray);
@@ -619,18 +632,18 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
     private void copySoft() {
         JShellLink link = new JShellLink();
-        String filePath = JShellLink.getDirectory("") + path + "\\HktSoft\\server\\bin\\HKT Soft.exe";
-        File f = new File("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\HktSoft");
+        String filePath = JShellLink.getDirectory("") + path + "\\HKT_Software_4.0\\server\\bin\\HKT Soft.exe";
+        File f = new File(defaultDirectory() + File.separator+"\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\HKT_Software_4.0");
         f.mkdir();
         link.setFolder(f.getPath());
 
-        link.setName("HKT Software");
+        link.setName("HKT Software 4.0");
 
         link.setPath(filePath);
 
         link.save();
 
-        String filePath1 = JShellLink.getDirectory("") + path + "\\HktSoft\\Uninstall.exe";
+        String filePath1 = JShellLink.getDirectory("") + path + "\\HKT_Software_4.0\\Uninstall.exe";
         link.setName("Uninstall");
 
         link.setPath(filePath1);
@@ -640,7 +653,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
     private String getWin() {
         try {
-            File f = new File(JShellLink.getDirectory("") + path + "\\HktSoft\\server\\bin\\Win.vbs");
+            File f = new File(JShellLink.getDirectory("") + path + "\\HKT_Software_4.0\\server\\bin\\Win.vbs");
             Process p = Runtime.getRuntime().exec("cscript //NoLogo " + f.getPath());
             String sn = "";
             BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -650,12 +663,12 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             }
             input.close();
             if (sn.equals("64")) {
-                return "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\HKT Software";
+                return "HKEY_LOCAL_MACHINE\\SOFTWARE\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\HKT Software 4.0";
             } else {
-                return "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\HKT Software";
+                return "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\HKT Software 4.0";
             }
         } catch (Exception e) {
-            return "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\HKT Software";
+            return "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\HKT Software 4.0";
         }
 
     }
@@ -841,7 +854,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
     private void runSoft() {
         try {
-            String filePath = JShellLink.getDirectory("") + path + "\\HktSoft\\server\\bin\\HKT Soft.exe";
+            String filePath = JShellLink.getDirectory("") + path + "\\HKT_Software_4.0\\server\\bin\\HKT Soft.exe";
             File file = new File(filePath);
 
             String cmdarray[] = new String[]{"cmd", "/c", file.getAbsolutePath()};

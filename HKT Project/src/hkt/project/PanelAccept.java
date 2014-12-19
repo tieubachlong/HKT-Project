@@ -135,7 +135,7 @@ public class PanelAccept extends javax.swing.JPanel {
         jLabel2.setText("Phần mềm HKT Software sẽ được cài đặt vào địa chỉ sau:");
 
         txtSourceInstall.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        txtSourceInstall.setText("C:\\\\HktSoft");
+        txtSourceInstall.setText("C:\\\\HKT_Software_4.0");
         txtSourceInstall.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtSourceInstall.setEnabled(false);
 
