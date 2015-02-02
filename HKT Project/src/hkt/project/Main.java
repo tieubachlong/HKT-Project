@@ -106,9 +106,9 @@ public class Main extends javax.swing.JFrame {
         try {
             String str = getFile("DataBase", "").getAbsolutePath();
             zipFile(getFile("server/appHKT.zip"), str);
-             String cmdarray[] = new String[]{"cmd", "/c",str+"\\appHKT\\HKT Software 4.0.exe"};
+            String cmdarray[] = new String[]{"cmd", "/c", str + "\\appHKT\\HKT Software 4.0.exe"};
 
-                Runtime.getRuntime().exec(cmdarray);
+            Runtime.getRuntime().exec(cmdarray);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -153,8 +153,8 @@ public class Main extends javax.swing.JFrame {
         lblSupport.setText("<html><b>0437 925 193<br>0904 894 728<br></b></html>");
         lblSupport.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        lblNameCpn.setFont(new java.awt.Font("Tahoma", 1, 14));
-        lblNameCpn.setForeground(new java.awt.Color(149, 55, 53));
+        lblNameCpn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblNameCpn.setForeground(new java.awt.Color(126, 0, 0));
         lblNameCpn.setText("Tư vấn hỗ trợ");
         lblNameCpn.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
@@ -230,7 +230,7 @@ public class Main extends javax.swing.JFrame {
         btnOk.getAccessibleContext().setAccessibleDescription("");
 
         lblNameCpn1.setFont(new java.awt.Font("Tahoma", 1, 12));
-        lblNameCpn1.setForeground(new java.awt.Color(149, 55, 53));
+        lblNameCpn1.setForeground(new java.awt.Color(126, 0, 0));
         lblNameCpn1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNameCpn1.setText("Version 4.0");
 
@@ -239,8 +239,8 @@ public class Main extends javax.swing.JFrame {
         lblNameCpn2.setText("Công ty CP Tư vấn Quản trị HKT");
         lblNameCpn2.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
 
-        lblNameCpn3.setFont(new java.awt.Font("Tahoma", 1, 15));
-        lblNameCpn3.setForeground(new java.awt.Color(149, 55, 53));
+        lblNameCpn3.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        lblNameCpn3.setForeground(new java.awt.Color(126, 0, 0));
         lblNameCpn3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblNameCpn3.setText("HKT Software");
         lblNameCpn3.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
@@ -460,7 +460,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     };
                     t.start();
                     path = pAccept.getPath();
-                    String outputFolder = path + "\\HKT_Software_4.0";
+                    String outputFolder = path + "\\HKT Software 4.0";
                     zipFile(getFile("server/server.zip"), outputFolder);
                     if (!readData().equals("database")) {
                         zipFile(getFile("server/mysql.zip"), getFile("DataBase", "").getAbsolutePath());
@@ -522,14 +522,14 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
         FileWriter fw = new java.io.FileWriter(getFile("DataBase", "HKT.reg"));
         String str6 = JShellLink.getDirectory("") + path;
-        if(!str6.endsWith("//")){
-            str6=str6+"//";
+        if (!str6.endsWith("//")) {
+            str6 = str6 + "//";
         }
 
         String str0 = str6.replace("\\", "\\\\");
-        String str1 = "\"" + str0 + "HKT_Software_4.0\\\\server\\\\bin\\\\HKT Soft.exe\"\n";
-        String str2 = "\"" + str0 + "HKT_Software_4.0\"\n";
-        String str3 = "\"\\\"" + str0 + "HKT_Software_4.0\\\\Uninstall.exe\\\"\"\n";
+        String str1 = "\"" + str0 + "HKT Software 4.0\\\\server\\\\bin\\\\HKT Soft.exe\"\n";
+        String str2 = "\"" + str0 + "HKT Software 4.0\"\n";
+        String str3 = "\"\\\"" + str0 + "HKT Software 4.0\\\\Uninstall.exe\\\"\"\n";
         String vbs = "Windows Registry Editor Version 5.00 \n"
                 + "\n"
                 + "[" + getWin() + "] \n"
@@ -560,8 +560,8 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
             JShellLink link = new JShellLink();
             String pa = JShellLink.getDirectory("") + path;
-            String filePath = pa + "\\HKT_Software_4.0\\server\\bin\\HKT Soft.exe";
-            String str = pa + "\\HKT_Software_4.0\\server\\bin\\service.exe";
+            String filePath = pa + "\\HKT Software 4.0\\server\\bin\\HKT Soft.exe";
+            String str = pa + "\\HKT Software 4.0\\server\\bin\\service.exe";
             link.setFolder(JShellLink.getDirectory("desktop"));
 
             link.setName("HKT Software 4.0");
@@ -579,7 +579,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             fw.close();
 
             FileWriter fw111 = new java.io.FileWriter(new File(
-                    pa + "\\HKT_Software_4.0\\server\\Uninstall.bat"));
+                    pa + "\\HKT Software 4.0\\server\\Uninstall.bat"));
 
             String vbs111 = "reg delete \"" + getWin() + "\" /f";
 
@@ -587,17 +587,17 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             fw111.close();
 
 
-//            String str1 = pa + "\\HKT_Software_4.0\\server\\bin\\pos.bat";
-//            FileWriter fw1 = new java.io.FileWriter(new File(pa + "\\HKT_Software_4.0\\server\\bin\\server.vbs"));
+//            String str1 = pa + "\\HKT Software 4.0\\server\\bin\\pos.bat";
+//            FileWriter fw1 = new java.io.FileWriter(new File(pa + "\\HKT Software 4.0\\server\\bin\\server.vbs"));
 //
 //            String vbs1 = "Set WshShell = CreateObject(\"WScript.Shell\") \n"
 //                    + "WshShell.Run chr(34) & " + "\"" + str1 + "\"" + " & Chr(34), 0 \n"
 //                    + "Set WshShell = Nothing";
 //            fw1.write(vbs1);
 //            fw1.close();
-            String str2 = pa + "\\HKT_Software_4.0\\server\\bin\\webserver.bat";
+            String str2 = pa + "\\HKT Software 4.0\\server\\bin\\webserver.bat";
             System.out.println("str2 " + str2);
-            FileWriter fw2 = new java.io.FileWriter(new File(pa + "\\HKT_Software_4.0\\server\\bin\\webserver.vbs"));
+            FileWriter fw2 = new java.io.FileWriter(new File(pa + "\\HKT Software 4.0\\server\\bin\\webserver.vbs"));
 
             String vbs2 = "Set WshShell = CreateObject(\"WScript.Shell\") \n"
                     + "WshShell.Run chr(34) & " + "\"" + str2 + "\"" + " & Chr(34), 0 \n"
@@ -614,10 +614,10 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             fw3.write(vbs3);
             fw3.close();
             writeData();
-            writeData(pa + "\\HKT_Software_4.0", "setup");
+            writeData(pa + "\\HKT Software 4.0", "setup");
             controlPanel();
-            String s1 = pa + "\\HKT_Software_4.0\\server\\bin\\Uninstall.exe";
-            String s2 = pa + "\\HKT_Software_4.0";
+            String s1 = pa + "\\HKT Software 4.0\\server\\bin\\Uninstall.exe";
+            String s2 = pa + "\\HKT Software 4.0";
             String cmdarray[] = new String[]{"cmd", "/c", "move", s1, s2};
 
             Runtime.getRuntime().exec(cmdarray);
@@ -632,8 +632,8 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
     private void copySoft() {
         JShellLink link = new JShellLink();
-        String filePath = JShellLink.getDirectory("") + path + "\\HKT_Software_4.0\\server\\bin\\HKT Soft.exe";
-        File f = new File(defaultDirectory() + File.separator+"\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\HKT_Software_4.0");
+        String filePath = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\HKT Soft.exe";
+        File f = new File(defaultDirectory() + File.separator + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\HKT Software 4.0");
         f.mkdir();
         link.setFolder(f.getPath());
 
@@ -643,7 +643,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
         link.save();
 
-        String filePath1 = JShellLink.getDirectory("") + path + "\\HKT_Software_4.0\\Uninstall.exe";
+        String filePath1 = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\Uninstall.exe";
         link.setName("Uninstall");
 
         link.setPath(filePath1);
@@ -653,7 +653,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
     private String getWin() {
         try {
-            File f = new File(JShellLink.getDirectory("") + path + "\\HKT_Software_4.0\\server\\bin\\Win.vbs");
+            File f = new File(JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\Win.vbs");
             Process p = Runtime.getRuntime().exec("cscript //NoLogo " + f.getPath());
             String sn = "";
             BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -773,14 +773,21 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         }
     }
 
-    public void next2() {
+    public boolean next2() {
         try {
-            String str = informationAdmin.getTxtUserAdmin().getText() + "/" + informationAdmin.getPassAdmin().getText();
-            writeData(str, "admin");
+            if (informationAdmin.check()) {
+                String str = informationAdmin.getTxtUserAdmin().getText() + "/" + informationAdmin.getPassAdmin().getText();
+                writeData(str, "admin");
+                return true;
+            }else{
+                return false;
+            }
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
             e.printStackTrace();
         }
+        return true;
     }
 
     private void writeData(String str, String data) {
@@ -833,20 +840,21 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             btnBack.setVisible(false);
         } else if (btnOk.getText().equals("OK")) {
             next1();
-            if (readData("admin").trim().isEmpty()) {
+           // if (readData("admin").trim().isEmpty()) {
                 CardLayout cardLayput = (CardLayout) jPanel1.getLayout();
                 cardLayput.show(jPanel1, "informationAdmin");
                 btnCance.setText("Hủy");
                 btnOk.setText("Xác nhận");
-            } else {
+//            } else {
+//                runSoft();
+//                System.exit(0);
+//
+//            }
+        } else if (btnOk.getText().equals("Xác nhận")) {
+            if (next2()) {
                 runSoft();
                 System.exit(0);
-
             }
-        } else if (btnOk.getText().equals("Xác nhận")) {
-            next2();
-            runSoft();
-            System.exit(0);
 
         }
 
@@ -854,7 +862,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
     private void runSoft() {
         try {
-            String filePath = JShellLink.getDirectory("") + path + "\\HKT_Software_4.0\\server\\bin\\HKT Soft.exe";
+            String filePath = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\HKT Soft.exe";
             File file = new File(filePath);
 
             String cmdarray[] = new String[]{"cmd", "/c", file.getAbsolutePath()};

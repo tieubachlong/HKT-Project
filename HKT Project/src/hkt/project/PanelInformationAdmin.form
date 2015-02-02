@@ -32,7 +32,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLabel6" alignment="0" pref="379" max="32767" attributes="0"/>
                   <Component id="jLabel5" alignment="0" min="-2" pref="379" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -54,7 +55,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="29" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -80,7 +81,9 @@
                       <Component id="passRemember" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jLabel6" min="-2" pref="23" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Component id="lblMessage" min="-2" pref="26" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel5" min="-2" pref="31" max="-2" attributes="0"/>
@@ -156,6 +159,13 @@
           <Font name="Tahoma" size="14" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="&lt;html&gt;&#x110;&#xe2;y l&#xe0; t&#xe0;i kho&#x1ea3;n t&#x1ed1;i cao, qu&#xfd; kh&#xe1;ch c&#x1ea7;n b&#x1ea3;o m&#x1ead;t v&#xe0; l&#x1b0;u tr&#x1eef; &lt;/br&gt;c&#x1ea9;n tr&#x1ecd;ng&lt;/br&gt;&lt;/html&gt;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel6">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="cc" type="rgb"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

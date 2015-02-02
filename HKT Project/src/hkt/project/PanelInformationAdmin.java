@@ -32,6 +32,20 @@ public class PanelInformationAdmin extends javax.swing.JPanel {
         return txtUserAdmin;
     }
     
+    public boolean check(){
+        if(txtUserAdmin.getText().trim().isEmpty()
+                ||passAdmin.getText().trim().isEmpty()
+                ){
+            jLabel6.setText("Vui lòng nhập User và Pass");
+            return false;
+        }
+        if(!passAdmin.getText().equals(passRemember.getText())){
+            jLabel6.setText("Xác nhận sai");
+            return false;
+        }
+        return true;
+    }
+    
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -51,6 +65,7 @@ public class PanelInformationAdmin extends javax.swing.JPanel {
         passRemember = new javax.swing.JPasswordField();
         lblMessage = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(226, 237, 255));
         setFont(new java.awt.Font("Tahoma", 0, 14));
@@ -77,8 +92,10 @@ public class PanelInformationAdmin extends javax.swing.JPanel {
 
         lblMessage.setForeground(new java.awt.Color(255, 0, 0));
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14));
         jLabel5.setText("<html>Đây là tài khoản tối cao, quý khách cần bảo mật và lưu trữ </br>cẩn trọng</br></html>");
+
+        jLabel6.setForeground(new java.awt.Color(204, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -86,9 +103,10 @@ public class PanelInformationAdmin extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -102,7 +120,7 @@ public class PanelInformationAdmin extends javax.swing.JPanel {
                                 .addComponent(passRemember)
                                 .addComponent(passAdmin)
                                 .addComponent(txtUserAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,7 +141,9 @@ public class PanelInformationAdmin extends javax.swing.JPanel {
                         .addComponent(passAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(passRemember, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(84, 84, 84)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
                 .addComponent(lblMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,6 +157,7 @@ public class PanelInformationAdmin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lblMessage;
     private javax.swing.JPasswordField passAdmin;
     private javax.swing.JPasswordField passRemember;
