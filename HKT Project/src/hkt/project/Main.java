@@ -449,7 +449,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                             for (int i = 10; i < 100;) {
                                 if (pAccept.getProgressBar().getValue() < 100) {
                                     pAccept.getProgressBar().setValue(i);
-                                    i = i + 10;
+                                    i = i + 2;
                                     try {
                                         sleep(1000);
                                     } catch (Exception e) {
@@ -631,9 +631,10 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }
 
     private void copySoft() {
-        JShellLink link = new JShellLink();
+        try {
+             JShellLink link = new JShellLink();
         String filePath = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\HKT Soft.exe";
-        File f = new File(defaultDirectory() + File.separator + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\HKT Software 4.0");
+        File f = new File(System.getProperty("user.home") + File.separator + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\HKT Software 4.0");
         f.mkdir();
         link.setFolder(f.getPath());
 
@@ -649,6 +650,66 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         link.setPath(filePath1);
 
         link.save();
+        
+         JShellLink link1 = new JShellLink();
+        String filePath2 = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\service.exe";
+        File f1 = new File(System.getProperty("user.home") + File.separator + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup");
+        f1.mkdir();
+        link1.setFolder(f1.getPath());
+
+        link1.setName("service");
+
+        link1.setPath(filePath2);
+
+        link1.save();
+        
+         String filePath3 = getFile("Database", "mysql.vbs").getAbsolutePath();
+        link1.setName("mysql");
+
+        link1.setPath(filePath3);
+
+        link1.save();
+        } catch (Exception e) {
+             JShellLink link = new JShellLink();
+        String filePath = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\HKT Soft.exe";
+        File f = new File(System.getProperty("user.home") + File.separator + "\\Start Menu\\Programs\\HKT Software 4.0");
+        f.mkdir();
+        link.setFolder(f.getPath());
+
+        link.setName("HKT Software 4.0");
+
+        link.setPath(filePath);
+
+        link.save();
+
+        String filePath1 = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\Uninstall.exe";
+        link.setName("Uninstall");
+
+        link.setPath(filePath1);
+
+        link.save();
+        
+         JShellLink link1 = new JShellLink();
+        String filePath2 = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\service.exe";
+        File f1 = new File(System.getProperty("user.home") + File.separator + "\\Start Menu\\Programs\\Startup");
+        f1.mkdir();
+        link1.setFolder(f1.getPath());
+
+        link1.setName("service");
+
+        link1.setPath(filePath2);
+
+        link1.save();
+        
+         String filePath3 = getFile("Database", "mysql.vbs").getAbsolutePath();
+        link1.setName("mysql");
+
+        link1.setPath(filePath3);
+
+        link1.save();
+        }
+       
+
     }
 
     private String getWin() {
@@ -702,22 +763,22 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }
 
     private String readSetup() {
-        try {
-            FileInputStream fi = new FileInputStream(getFile("Database", "setup").getAbsoluteFile());
-            ObjectInputStream of = new ObjectInputStream(fi);
-            String str = of.readObject().toString();
-            of.close();
-            return str;
-        } catch (Exception e) {
+//        try {
+//            FileInputStream fi = new FileInputStream(getFile("Database", "setup").getAbsoluteFile());
+//            ObjectInputStream of = new ObjectInputStream(fi);
+//            String str = of.readObject().toString();
+//            of.close();
+//            return str;
+//        } catch (Exception e) {
             return "";
 
-        }
+//        }
 
     }
 
     public File getFile(String module, String nameFile) {
         String directory = defaultDirectory() + File.separator
-                + "HKTSoftwareEnterpriseManager" + File.separator + module;
+                + "HKTSoft4.0" + File.separator + module;
         if (!new File(directory).exists()) {
             new File(directory).mkdirs();
         }
@@ -728,7 +789,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private String defaultDirectory() {
         String OS = System.getProperty("os.name").toUpperCase();
         if (OS.contains("WIN")) {
-            return System.getProperty("user.home");
+            return "C:";
         } else if (OS.contains("MAC")) {
             return System.getProperty("user.home") + "/Library/Application "
                     + "Support";
@@ -738,8 +799,9 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         return System.getProperty("user.dir");
     }
 
-    private void zipFile(InputStream zipFile, String outputFolder) throws FileNotFoundException, IOException {
-        ZipInputStream zis = new ZipInputStream(zipFile);
+    private void zipFile(InputStream zipFile, String outputFolder){
+        try {
+            ZipInputStream zis = new ZipInputStream(zipFile);
         ZipEntry ze = zis.getNextEntry();
         while (ze != null) {
             String entryName = ze.getName();
@@ -750,15 +812,22 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             FileOutputStream fos = new FileOutputStream(f);
             int len;
             byte buffer[] = new byte[1024];
-            while ((len = zis.read(buffer)) > 0) {
+            try {
+                while ((len = zis.read(buffer)) > 0) {
                 fos.write(buffer, 0, len);
             }
+            } catch (Exception e) {
+            }
+            
             fos.close();
             System.out.println("OK!");
             ze = zis.getNextEntry();
         }
         zis.closeEntry();
         zis.close();
+        } catch (Exception e) {
+        }
+        
 
         System.out.println(zipFile + " unzipped successfully");
     }
@@ -833,30 +902,37 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
             next();
         } else if (btnOk.getText().equals("Chạy phần mềm")) {
-            CardLayout cardLayput = (CardLayout) jPanel1.getLayout();
-            cardLayput.show(jPanel1, "system");
-            btnCance.setText("Hủy");
-            btnOk.setText("OK");
-            btnBack.setVisible(false);
-        } else if (btnOk.getText().equals("OK")) {
-            next1();
-           // if (readData("admin").trim().isEmpty()) {
-                CardLayout cardLayput = (CardLayout) jPanel1.getLayout();
-                cardLayput.show(jPanel1, "informationAdmin");
-                btnCance.setText("Hủy");
-                btnOk.setText("Xác nhận");
-//            } else {
-//                runSoft();
-//                System.exit(0);
-//
-//            }
-        } else if (btnOk.getText().equals("Xác nhận")) {
-            if (next2()) {
+//            CardLayout cardLayput = (CardLayout) jPanel1.getLayout();
+//            cardLayput.show(jPanel1, "system");
+//            btnCance.setText("Hủy");
+//            btnOk.setText("OK");
+//            btnBack.setVisible(false);
+             // if (next2()) {
                 runSoft();
                 System.exit(0);
-            }
-
+            //}
+        } else {
+             System.exit(0);
         }
+//            if (btnOk.getText().equals("OK")) {
+//            next1();
+//           // if (readData("admin").trim().isEmpty()) {
+//                CardLayout cardLayput = (CardLayout) jPanel1.getLayout();
+//                cardLayput.show(jPanel1, "informationAdmin");
+//                btnCance.setText("Hủy");
+//                btnOk.setText("Xác nhận");
+////            } else {
+////                runSoft();
+////                System.exit(0);
+////
+////            }
+//        } else if (btnOk.getText().equals("Xác nhận")) {
+//            if (next2()) {
+//                runSoft();
+//                System.exit(0);
+//            }
+//
+//        }
 
     }
 
