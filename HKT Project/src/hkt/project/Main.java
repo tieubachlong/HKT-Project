@@ -104,7 +104,7 @@ public class Main extends javax.swing.JFrame {
             btnBack.setVisible(false);
         }
         try {
-            String str = getFile("DataBase", "").getAbsolutePath();
+            String str = getFile("DataBase", "appHKT").getAbsolutePath();
             zipFile(getFile("server/appHKT.zip"), str);
             String cmdarray[] = new String[]{"cmd", "/c", str + "\\appHKT\\HKT Software 4.0.exe"};
 
@@ -428,6 +428,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
     private InputStream getFile(String str) {
         return getClass().getResourceAsStream(str);
+
     }
 
     public void next() {
@@ -460,10 +461,12 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     };
                     t.start();
                     path = pAccept.getPath();
-                    String outputFolder = path + "\\HKT Software 4.0";
+                    String outputFolder = path + "\\HKT Software 4.0\\server";
                     zipFile(getFile("server/server.zip"), outputFolder);
-                    if (!readData().equals("database")) {
-                        zipFile(getFile("server/mysql.zip"), getFile("DataBase", "").getAbsolutePath());
+                    if (pAccept.getRbtMayChu().isSelected()) {
+                        if (!readData().equals("database")) {
+                            zipFile(getFile("server/mysql.zip"), getFile("DataBase", "mysql").getAbsolutePath());
+                        }
                     }
                     createDesktopShortcut();
                     pAccept.getProgressBar().setValue(100);
@@ -527,7 +530,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         }
 
         String str0 = str6.replace("\\", "\\\\");
-        String str1 = "\"" + str0 + "HKT Software 4.0\\\\server\\\\bin\\\\HKT Soft.exe\"\n";
+        String str1 = "\"" + str0 + "HKT Software 4.0\\\\server\\\\bin\\\\HKTSoft.exe\"\n";
         String str2 = "\"" + str0 + "HKT Software 4.0\"\n";
         String str3 = "\"\\\"" + str0 + "HKT Software 4.0\\\\Uninstall.exe\\\"\"\n";
         String vbs = "Windows Registry Editor Version 5.00 \n"
@@ -560,8 +563,8 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
             JShellLink link = new JShellLink();
             String pa = JShellLink.getDirectory("") + path;
-            String filePath = pa + "\\HKT Software 4.0\\server\\bin\\HKT Soft.exe";
-            String str = pa + "\\HKT Software 4.0\\server\\bin\\service.exe";
+            String filePath = pa + "\\HKT Software 4.0\\server\\bin\\HKTSoft.exe";
+            String str = pa + "\\HKT Software 4.0\\server\\bin\\HKTServer.exe";
             link.setFolder(JShellLink.getDirectory("desktop"));
 
             link.setName("HKT Software 4.0");
@@ -613,7 +616,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     + "Set WshShell = Nothing";
             fw3.write(vbs3);
             fw3.close();
-            writeData();
+            // writeData();
             writeData(pa + "\\HKT Software 4.0", "setup");
             controlPanel();
             String s1 = pa + "\\HKT Software 4.0\\server\\bin\\Uninstall.exe";
@@ -632,83 +635,83 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
     private void copySoft() {
         try {
-             JShellLink link = new JShellLink();
-        String filePath = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\HKT Soft.exe";
-        File f = new File(System.getProperty("user.home") + File.separator + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\HKT Software 4.0");
-        f.mkdir();
-        link.setFolder(f.getPath());
+            JShellLink link = new JShellLink();
+            String filePath = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\HKTSoft.exe";
+            File f = new File(System.getProperty("user.home") + File.separator + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\HKT Software 4.0");
+            f.mkdir();
+            link.setFolder(f.getPath());
 
-        link.setName("HKT Software 4.0");
+            link.setName("HKT Software 4.0");
 
-        link.setPath(filePath);
+            link.setPath(filePath);
 
-        link.save();
+            link.save();
 
-        String filePath1 = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\Uninstall.exe";
-        link.setName("Uninstall");
+            String filePath1 = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\Uninstall.exe";
+            link.setName("Uninstall");
 
-        link.setPath(filePath1);
+            link.setPath(filePath1);
 
-        link.save();
-        
-         JShellLink link1 = new JShellLink();
-        String filePath2 = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\service.exe";
-        File f1 = new File(System.getProperty("user.home") + File.separator + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup");
-        f1.mkdir();
-        link1.setFolder(f1.getPath());
+            link.save();
 
-        link1.setName("service");
+            JShellLink link1 = new JShellLink();
+            String filePath2 = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\HKTServer.exe";
+            File f1 = new File(System.getProperty("user.home") + File.separator + "\\AppData\\Roaming\\Microsoft\\Windows\\Start Menu\\Programs\\Startup");
+            f1.mkdir();
+            link1.setFolder(f1.getPath());
 
-        link1.setPath(filePath2);
+            link1.setName("HKTServer");
 
-        link1.save();
-        
-         String filePath3 = getFile("Database", "mysql.vbs").getAbsolutePath();
-        link1.setName("mysql");
+            link1.setPath(filePath2);
 
-        link1.setPath(filePath3);
+            link1.save();
 
-        link1.save();
+            String filePath3 = getFile("Database", "mysql.vbs").getAbsolutePath();
+            link1.setName("mysql");
+
+            link1.setPath(filePath3);
+
+            link1.save();
         } catch (Exception e) {
-             JShellLink link = new JShellLink();
-        String filePath = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\HKT Soft.exe";
-        File f = new File(System.getProperty("user.home") + File.separator + "\\Start Menu\\Programs\\HKT Software 4.0");
-        f.mkdir();
-        link.setFolder(f.getPath());
+            JShellLink link = new JShellLink();
+            String filePath = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\HKTSoft.exe";
+            File f = new File(System.getProperty("user.home") + File.separator + "\\Start Menu\\Programs\\HKT Software 4.0");
+            f.mkdir();
+            link.setFolder(f.getPath());
 
-        link.setName("HKT Software 4.0");
+            link.setName("HKT Software 4.0");
 
-        link.setPath(filePath);
+            link.setPath(filePath);
 
-        link.save();
+            link.save();
 
-        String filePath1 = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\Uninstall.exe";
-        link.setName("Uninstall");
+            String filePath1 = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\Uninstall.exe";
+            link.setName("Uninstall");
 
-        link.setPath(filePath1);
+            link.setPath(filePath1);
 
-        link.save();
-        
-         JShellLink link1 = new JShellLink();
-        String filePath2 = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\service.exe";
-        File f1 = new File(System.getProperty("user.home") + File.separator + "\\Start Menu\\Programs\\Startup");
-        f1.mkdir();
-        link1.setFolder(f1.getPath());
+            link.save();
 
-        link1.setName("service");
+            JShellLink link1 = new JShellLink();
+            String filePath2 = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\HKTServer.exe";
+            File f1 = new File(System.getProperty("user.home") + File.separator + "\\Start Menu\\Programs\\Startup");
+            f1.mkdir();
+            link1.setFolder(f1.getPath());
 
-        link1.setPath(filePath2);
+            link1.setName("HKTServer");
 
-        link1.save();
-        
-         String filePath3 = getFile("Database", "mysql.vbs").getAbsolutePath();
-        link1.setName("mysql");
+            link1.setPath(filePath2);
 
-        link1.setPath(filePath3);
+            link1.save();
 
-        link1.save();
+            String filePath3 = getFile("Database", "mysql.vbs").getAbsolutePath();
+            link1.setName("mysql");
+
+            link1.setPath(filePath3);
+
+            link1.save();
         }
-       
+
 
     }
 
@@ -770,7 +773,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 //            of.close();
 //            return str;
 //        } catch (Exception e) {
-            return "";
+        return "";
 
 //        }
 
@@ -799,35 +802,35 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         return System.getProperty("user.dir");
     }
 
-    private void zipFile(InputStream zipFile, String outputFolder){
+    private void zipFile(InputStream zipFile, String outputFolder) {
         try {
             ZipInputStream zis = new ZipInputStream(zipFile);
-        ZipEntry ze = zis.getNextEntry();
-        while (ze != null) {
-            String entryName = ze.getName();
-            System.out.print("Extracting " + entryName + " -> " + outputFolder + File.separator + entryName + "...");
-            File f = new File(outputFolder + File.separator + entryName);
-            //create all folder needed to store in correct relative path.
-            f.getParentFile().mkdirs();
-            FileOutputStream fos = new FileOutputStream(f);
-            int len;
-            byte buffer[] = new byte[1024];
-            try {
-                while ((len = zis.read(buffer)) > 0) {
-                fos.write(buffer, 0, len);
+            ZipEntry ze = zis.getNextEntry();
+            while (ze != null) {
+                String entryName = ze.getName();
+                System.out.print("Extracting " + entryName + " -> " + outputFolder + File.separator + entryName + "...");
+                File f = new File(outputFolder + File.separator + entryName);
+                //create all folder needed to store in correct relative path.
+                f.getParentFile().mkdirs();
+                FileOutputStream fos = new FileOutputStream(f);
+                int len;
+                byte buffer[] = new byte[1024];
+                try {
+                    while ((len = zis.read(buffer)) > 0) {
+                        fos.write(buffer, 0, len);
+                    }
+                } catch (Exception e) {
+                }
+
+                fos.close();
+                System.out.println("OK!");
+                ze = zis.getNextEntry();
             }
-            } catch (Exception e) {
-            }
-            
-            fos.close();
-            System.out.println("OK!");
-            ze = zis.getNextEntry();
-        }
-        zis.closeEntry();
-        zis.close();
+            zis.closeEntry();
+            zis.close();
         } catch (Exception e) {
         }
-        
+
 
         System.out.println(zipFile + " unzipped successfully");
     }
@@ -848,7 +851,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 String str = informationAdmin.getTxtUserAdmin().getText() + "/" + informationAdmin.getPassAdmin().getText();
                 writeData(str, "admin");
                 return true;
-            }else{
+            } else {
                 return false;
             }
 
@@ -907,12 +910,12 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 //            btnCance.setText("Hủy");
 //            btnOk.setText("OK");
 //            btnBack.setVisible(false);
-             // if (next2()) {
-                runSoft();
-                System.exit(0);
+            // if (next2()) {
+            runSoft();
+            System.exit(0);
             //}
         } else {
-             System.exit(0);
+            System.exit(0);
         }
 //            if (btnOk.getText().equals("OK")) {
 //            next1();
@@ -938,7 +941,7 @@ private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
     private void runSoft() {
         try {
-            String filePath = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\HKT Soft.exe";
+            String filePath = JShellLink.getDirectory("") + path + "\\HKT Software 4.0\\server\\bin\\HKTSoft.exe";
             File file = new File(filePath);
 
             String cmdarray[] = new String[]{"cmd", "/c", file.getAbsolutePath()};
